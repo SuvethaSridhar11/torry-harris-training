@@ -1,0 +1,46 @@
+create database suve;
+use suve;
+create table regions(reg_id int unsigned not null primary key,reg_name varchar(50));
+create table countries(country_id char not null primary key,country_name varchar(50),reg_id int unsigned not null);
+create table jobs(job_id varchar(40) not null primary key,job_title varchar(50) not null,min_salary decimal unsigned ,max_salary decimal unsigned);
+create table locations(location_id int unsigned not null auto_increment primary key, street_address varchar(100), postal_code varchar(6),city varchar(20) not null, state_province varchar(20), country_id char(30) not null);
+create table departments(dept_id int unsigned not null primary key, dept_name varchar(30) not null, manager_id int unsigned,location_id int unsigned);
+create table employees(emp_id int unsigned not null primary key,first_name varchar(50) not null,last_name varchar(50) not null,email varchar(40) not null,phn_num varchar(50),hire_date date not null,job_id varchar(30) not null,salary dec not null,commission_pct decimal,manager_id int unsigned, dept_id int unsigned);
+create table job_history(emp_id int unsigned not null,start_date date not null ,end_date date not null,job_id varchar(40) not null,dept_id int unsigned not null, constraint PK_job_history primary key(emp_id,start_date));
+desc locations;
+select * from employees ;
+alter table countries add constraint FK_regioncountry foreign key(reg_id) references regions(reg_id);
+alter table locations add constraint FK_countrylocation foreign key(country_id) references countries(country_id);
+alter table departments add constraint FK_manager_iddepartments foreign key(manager_id) references departments(manager_id);
+alter table job_history add constraint FK_departmentsjob_history foreign key(dept_id) references departments(dept_id);
+insert into regions values(1,'Neyveli');
+insert into regions values(2,'California');
+insert into regions values(3,'Brazilia');
+insert into regions values(4,'Banglore');
+insert into countries values('9','India',1);
+insert into countries values('8','USA',2);
+insert into countries values('7','Brazil',3);
+insert into locations values(121,'107-A','607','Chennai','TamilNadu','9');
+insert into locations values(122,'107-B','608','Californiacity','US','8');
+insert into locations values(123,'107-C','609','SA','Bahia','7');
+insert into locations values(124,'107-D','6010','Miller','Karnataka','9');
+insert into departments values(111,'accounting',1234,121);
+insert into departments values(222,'sales',2345,122);
+insert into departments values(333,'production',3456,123);
+insert into departments values(444,'finance',4567,124);
+insert into jobs values('JE_21','JE',20000,35000);
+insert into jobs values('JE_22','JE',30000,45000);
+insert into jobs values('ASE_21','ASE',50000,75000);
+insert into jobs values('ASE_22','ASE',60000,95000);
+insert into employees values(101,'Achu','Arul','achuarul','1234567',STR_TO_DATE('23-FEB-2000', '%d-%M-%Y'),'JE_21',27000,'1.56','1234','111');
+insert into employees values(102,'Suve','Sri','suvsri','2345678',STR_TO_DATE('11-JAN-2001', '%d-%M-%Y'),'JE_22',37000,0.4,'3456','222');
+insert into employees values(103,'Swar','Laksh','swarnlaks','3456789',STR_TO_DATE('09-JUN-2002', '%d-%M-%Y'),'ASE_21',55000,'0.5','2345','222');
+insert into employees values(104,'Janani','Selva','janselva','4567890',STR_TO_DATE('24-AUG-2003', '%d-%M-%Y'),'ASE_22',77000,1.56,'4567','444');
+update employees set dept_id='333' where emp_id=102 ;
+insert into job_history values(102,STR_TO_DATE('15-JUN-2001', '%d-%M-%Y'),STR_TO_DATE('15-FEB-2021', '%d-%M-%Y'),'JE_22',222);
+insert into job_history values(101,STR_TO_DATE('15-JUN-2000', '%d-%M-%Y'),STR_TO_DATE('15-FEB-2021', '%d-%M-%Y'),'JE_21',111);
+insert into job_history values(103,STR_TO_DATE('15-JUN-2002', '%d-%M-%Y'),STR_TO_DATE('15-JULY-2021', '%d-%M-%Y'),'ASE_21',333);
+insert into job_history values(104,STR_TO_DATE('15-JUN-2004', '%d-%M-%Y'),STR_TO_DATE('15-MAY-2021', '%d-%M-%Y'),'ASE_22',444);
+
+
+
