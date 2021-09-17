@@ -1,0 +1,190 @@
+> use suvetha
+switched to db suvetha
+> db
+suvetha
+> db.createCollection("employee")
+{ "ok" : 1 }
+> db.employee.insertMany([{"name":"Suve","dept":"ase","salary"":"30000","city":"chennai"},{"name":"achu","dept":"manager":"salary":"50000","city":"banglore"},{"name":"dhaaru","dept":"finance","salary":"45000","city":"mumbai"}])
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:60
+> db.employee.insertMany([{"name":"Suve","dept":"ase","salary":"30000","city":"chennai"},{"name":"achu","dept":"manager","salary":"50000","city":"banglore"},{"name":"dhaaru","dept":"finance","salary":"45000","city":"mumbai"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("61443d621b8a671701354a33"),
+                ObjectId("61443d621b8a671701354a34"),
+                ObjectId("61443d621b8a671701354a35")
+        ]
+}
+> db.employee.find()
+{ "_id" : ObjectId("61443d621b8a671701354a33"), "name" : "Suve", "dept" : "ase", "salary" : "30000", "city" : "chennai" }
+{ "_id" : ObjectId("61443d621b8a671701354a34"), "name" : "achu", "dept" : "manager", "salary" : "50000", "city" : "banglore" }
+{ "_id" : ObjectId("61443d621b8a671701354a35"), "name" : "dhaaru", "dept" : "finance", "salary" : "45000", "city" : "mumbai" }
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a33"),
+        "name" : "Suve",
+        "dept" : "ase",
+        "salary" : "30000",
+        "city" : "chennai"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a34"),
+        "name" : "achu",
+        "dept" : "manager",
+        "salary" : "50000",
+        "city" : "banglore"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a35"),
+        "name" : "dhaaru",
+        "dept" : "finance",
+        "salary" : "45000",
+        "city" : "mumbai"
+}
+
+1.
+> db.employee.find().limit(1)
+{ "_id" : ObjectId("61443d621b8a671701354a33"), "name" : "Suve", "dept" : "ase", "salary" : "30000", "city" : "chennai" }
+> db.employee.find().limit(2)
+{ "_id" : ObjectId("61443d621b8a671701354a33"), "name" : "Suve", "dept" : "ase", "salary" : "30000", "city" : "chennai" }
+{ "_id" : ObjectId("61443d621b8a671701354a34"), "name" : "achu", "dept" : "manager", "salary" : "50000", "city" : "banglore" }
+
+3.
+> db.employee.find().sort({"name":1}).limit(2)
+{ "_id" : ObjectId("61443d621b8a671701354a33"), "name" : "Suve", "dept" : "ase", "salary" : "30000", "city" : "chennai" }
+{ "_id" : ObjectId("61443d621b8a671701354a34"), "name" : "achu", "dept" : "manager", "salary" : "50000", "city" : "banglore" }
+> db.employee.find().sort({"name":-1}).limit(2)
+{ "_id" : ObjectId("61443d621b8a671701354a35"), "name" : "dhaaru", "dept" : "finance", "salary" : "45000", "city" : "mumbai" }
+{ "_id" : ObjectId("61443d621b8a671701354a34"), "name" : "achu", "dept" : "manager", "salary" : "50000", "city" : "banglore" }
+
+2.
+> db.employee.find({salary:{$gt:"30000"}}).pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a34"),
+        "name" : "achu",
+        "dept" : "manager",
+        "salary" : "50000",
+        "city" : "banglore"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a35"),
+        "name" : "dhaaru",
+        "dept" : "finance",
+        "salary" : "45000",
+        "city" : "mumbai"
+}
+> db.employee.find({salary:{$lt:"50000"}}).pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a33"),
+        "name" : "suve",
+        "dept" : "ase",
+        "salary" : "30000",
+        "city" : "chennai"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a35"),
+        "name" : "dhaaru",
+        "dept" : "finance",
+        "salary" : "45000",
+        "city" : "mumbai"
+}
+
+> db.employee.find({salary:{$gte:"50000"}}).pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a34"),
+        "name" : "achu",
+        "dept" : "manager",
+        "salary" : "50000",
+        "city" : "banglore"
+}
+> db.employee.find({salary:{$lte:"45000"}}).pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a33"),
+        "name" : "suve",
+        "dept" : "ase",
+        "salary" : "30000",
+        "city" : "chennai"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a35"),
+        "name" : "dhaaru",
+        "dept" : "finance",
+        "salary" : "45000",
+        "city" : "mumbai"
+}
+> db.employee.find({salary:{$ne:"35000"}}).pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a33"),
+        "name" : "suve",
+        "dept" : "ase",
+        "salary" : "30000",
+        "city" : "chennai"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a34"),
+        "name" : "achu",
+        "dept" : "manager",
+        "salary" : "50000",
+        "city" : "banglore"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a35"),
+        "name" : "dhaaru",
+        "dept" : "finance",
+        "salary" : "45000",
+        "city" : "mumbai"
+}
+
+4.
+> db.employee.find({salary:{$ne:"35000"}}).count()
+3
+
+5.
+> db.employee.update({"name":"achu"},{"name":"achu","dept":"manager","salary":"50000"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employee.find({"name":"achu"})
+{ "_id" : ObjectId("61443d621b8a671701354a34"), "name" : "achu", "dept" : "manager", "salary" : "50000" }
+
+6.
+> db.employee.update({"name":"achu"},{"name":"achu","dept":"manager","salary":"50000","state":"karnataka"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employee.find({"name":"achu"})
+{ "_id" : ObjectId("61443d621b8a671701354a34"), "name" : "achu", "dept" : "manager", "salary" : "50000", "state" : "karnataka" }
+
+8.
+> db.employee.update({"name":"swarna"},{"name":"swarna","dept":"sales","salary":"30000"},{upsert:true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("614455ac04fa0ab5bca57290")
+})
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("61443d621b8a671701354a33"),
+        "name" : "suve",
+        "dept" : "ase",
+        "salary" : "30000",
+        "city" : "chennai"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a34"),
+        "name" : "achu",
+        "dept" : "manager",
+        "salary" : "50000",
+        "state" : "karnataka"
+}
+{
+        "_id" : ObjectId("61443d621b8a671701354a35"),
+        "name" : "dhaaru",
+        "dept" : "finance",
+        "salary" : "45000",
+        "city" : "mumbai"
+}
+{
+        "_id" : ObjectId("614455ac04fa0ab5bca57290"),
+        "name" : "swarna",
+        "dept" : "sales",
+        "salary" : "30000"
+}
