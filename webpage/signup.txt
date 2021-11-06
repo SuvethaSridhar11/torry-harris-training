@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registeration form</title>
+    <link rel="stylesheet" href="Style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+<div class="container">
+    <header>Register Now!</header>
+    <form action="adddata">
+        <div class="input-field">
+            <input type="text" name="name" required>
+            <label> Name</label>
+        </div>
+       
+        <div class="input-field">
+            <input type="text" name="username" required>
+            <label>Email or Username</label>
+        </div>
+        <div class="input-field">
+            <input class="pswrd" type="Password" name="password" required>
+
+            <label>Password</label>
+        </div>
+        <div class="input-field">
+            <input class="pswrd" type="Password"  required>
+
+            <label>Confirm Password</label>
+        </div>
+
+        <div class="button">
+            <div class="inner"></div>
+            <submit><button onclick="myFunction()">Create Account</button></submit>
+        </div>
+    </form>
+    <div class="login">
+        Already have an account? <a href="Login.html">login now</a>
+    </div>
+</div>
+<script>
+function myFunction(){
+  alert("Account created Successfully...!!!");
+  window.location="login.html";
+}
+</script>
+</body>
+</html>
