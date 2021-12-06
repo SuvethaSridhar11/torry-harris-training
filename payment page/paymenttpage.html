@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment form</title>
+    <link rel="stylesheet" href="pay.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+<form action="">
+
+   <h2>Payment details</h2>
+   <p> Accepted Cards</p>
+   <img src="visa.png">
+   <img src="mastercard.png">
+   <img src="upi.png">
+    
+    <p>Card number</p>
+    <input type="number" id="ccnum" name="cardnumber">
+	<p>CardHolder Name</p>
+     <input type="text" id="cname" name="cardname">
+    <div class="row">
+        <div class="no1">
+              <p> Expiry Date </p>
+              <input type="date" name="Expire Date" id="Expire Date">
+	    </div>
+	    <div class="no1">
+              <p>CVV</p>
+              <input type="password" name="CVV" id="CVV" maxlength="3">
+	    </div>
+	</div>
+	
+	<div class="button">
+            <div class="inner"></div>
+            <submit><button>Confirm Payment</button></submit>
+	</div>
+	
+	</form>
+</body>
+</html>
